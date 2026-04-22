@@ -1,6 +1,6 @@
 {
   "name": "json-rules-engine-upgraded",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A modern, TypeScript-first JSON rules engine — the comprehensive, maintained successor to json-rules-engine.",
   "keywords": [
     "rules",
