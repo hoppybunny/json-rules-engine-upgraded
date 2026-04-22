@@ -1,6 +1,6 @@
 # json-rules-engine-upgraded
 
-A modern, TypeScript-first JSON rules engine. See the [root README](https://github.com/clarachong/json-rules-engine-upgraded) for the full pitch, comparison, and docs.
+A modern, TypeScript-first JSON rules engine. See the [root README](https://github.com/hoppybunny/json-rules-engine-upgraded) for the full pitch, comparison, and docs.
 
 ## Install
 

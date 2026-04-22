@@ -4,7 +4,7 @@
   "private": true,
   "description": "Monorepo root for json-rules-engine-upgraded",
   "license": "MIT",
-  "author": "Clara Chong",
+  "author": "clara",
   "engines": {
     "node": ">=20"
   },

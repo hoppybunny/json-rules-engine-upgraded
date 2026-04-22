@@ -2,7 +2,7 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in `json-rules-engine-upgraded`, please report it via GitHub's [private vulnerability reporting](https://github.com/clarachong/json-rules-engine-upgraded/security/advisories/new) rather than opening a public issue.
+If you discover a security vulnerability in `json-rules-engine-upgraded`, please report it via GitHub's [private vulnerability reporting](https://github.com/hoppybunny/json-rules-engine-upgraded/security/advisories/new) rather than opening a public issue.
 
 You will receive a response within 5 business days. If the issue is confirmed, a patch release will follow as soon as a fix is ready; we will coordinate disclosure with you.
 

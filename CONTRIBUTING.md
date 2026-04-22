@@ -5,7 +5,7 @@ Thanks for helping to improve this codebase!
 ## Dev setup
 
 ```bash
-git clone https://github.com/clarachong/json-rules-engine-upgraded
+git clone https://github.com/hoppybunny/json-rules-engine-upgraded
 cd json-rules-engine-upgraded
 pnpm install
 pnpm test

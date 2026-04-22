@@ -12,14 +12,14 @@
     "typescript"
   ],
   "license": "MIT",
-  "author": "Clara Chong",
-  "homepage": "https://github.com/clarachong/json-rules-engine-upgraded",
+  "author": "clara",
+  "homepage": "https://github.com/hoppybunny/json-rules-engine-upgraded",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/clarachong/json-rules-engine-upgraded.git",
+    "url": "git+https://github.com/hoppybunny/json-rules-engine-upgraded.git",
     "directory": "packages/core"
   },
-  "bugs": "https://github.com/clarachong/json-rules-engine-upgraded/issues",
+  "bugs": "https://github.com/hoppybunny/json-rules-engine-upgraded/issues",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
