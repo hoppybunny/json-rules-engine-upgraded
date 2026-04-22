@@ -6,28 +6,24 @@ A lightweight TypeScript-first JSON rules engine for Node.js and browsers — an
 npm install json-rules-engine-upgraded
 ```
 
-## What it is
+## Synopsis
 
-A JSON rules engine lets you express business logic as data. Conditions are composed in JSON, evaluated against a fact set, and emit events when they match. Rules live outside your code: stored in a database, edited without a deploy, validated against a schema before going live.
+`json-rules-engine-upgraded` is a rules engine. Rules are composed of simple JSON structures — strictly typed, schema-validated at load time, and easy to persist in any JSON store.
 
-A rule looks like this:
+## Features
 
-```json
-{
-  "name": "grantDiscount",
-  "conditions": {
-    "all": [
-      { "fact": "cartTotal", "operator": "greaterThan", "value": 100 },
-      { "fact": "customer", "path": "$.tier", "operator": "in", "value": ["gold", "platinum"] }
-    ]
-  },
-  "event": { "type": "applyDiscount", "params": { "percent": 15 } }
-}
-```
+- Rules expressed in simple, strictly-typed JSON; human-readable and persistable
+- Full support for `all` / `any` / `not` boolean operators, with recursive nesting and short-circuit evaluation
+- 28+ built-in operators across 6 families (comparison, collection, string, presence, size, numeric); custom operators supported
+- Async fact resolution with per-run caching and cycle detection
+- TypeScript-first end-to-end; zero runtime dependencies
+- JSON Schema export for the DSL, plus a `$schema` version field on every rule
+- Structured errors with `ruleName`, `conditionPath`, `operator`, and `factValue` context
+- Database-ready: rules drop straight into MongoDB, Postgres `jsonb`, DynamoDB, Firestore, or Redis
+- Secure; no `eval()`, ReDoS-checked regex, facts deep-frozen per run
+- Isomorphic; runs in Node and browsers without polyfills; ~35KB
 
-You hand the engine a set of facts (`{ cartTotal: 150, customer: { tier: "gold" } }`), and it tells you which rule events fire.
-
-## Quick start
+## Basic Example
 
 ```ts
 import { Engine } from 'json-rules-engine-upgraded';
@@ -53,20 +49,6 @@ const { passed } = await engine.run({
 
 console.log(passed); // [{ type: 'fouledOut', params: { message: 'Player has fouled out' } }]
 ```
-
-## Features
-
-- Declarative `all` / `any` / `not` composition with unlimited nesting and short-circuit evaluation
-- 28+ built-in operators across 6 families (comparison, collection, string, presence, size, numeric)
-- Async fact resolution with per-run caching and cycle detection
-- JSONPath field access (`$.user.address.country`) so rules operate on structured data without flattening
-- Priority ordering with deterministic insertion-order tiebreaks
-- Structured errors with full context (`ruleName`, `conditionPath`, `operator`, `factValue`)
-- JSON Schema export for the rule DSL, plus `$schema` versioning so rules can evolve safely
-- Strict equality by default; loose `==`-style matching is an explicit opt-in operator
-- **Database-ready**: rules are plain JSON, ready for MongoDB, Postgres `jsonb`, DynamoDB, Firestore, Redis, or any store that holds JSON
-- Safety: no `eval`, no `new Function`, ReDoS-checked regex, facts deep-frozen per run
-- Zero runtime dependencies, ~35KB, runs in Node and browsers without polyfills
 
 ## Storing rules in MongoDB (or any JSON store)
 
@@ -115,8 +97,6 @@ const { passed } = await engine.run({
 });
 ```
 
-Because rules are JSON, you get everything Mongo already gives you for free: indexing on `name`, `event.type`, or `$schema`; querying by condition content; soft-deletes; audit trails via change streams; A/B tested rulesets via a `variant` field. No ORM, no schema migrations for rule shape changes — just bump `$schema` when you evolve the DSL.
-
 Works the same with Postgres `jsonb`, DynamoDB, Firestore, Redis, or any store that holds JSON.
 
 ## Operator catalogue
@@ -130,11 +110,9 @@ Works the same with Postgres `jsonb`, DynamoDB, Firestore, Redis, or any store t
 | Size | `lengthEqual`, `lengthGreaterThan`, `lengthLessThan` |
 | Numeric | `approximately` |
 
-Need more? Register a custom operator with `engine.addOperator({ name, evaluate, validateConditionValue })`.
+Register a custom operator with `engine.addOperator({ name, evaluate, validateConditionValue })`.
 
 ## Comparison
-
-How it compares to adjacent libraries:
 
 | Feature | `json-rules-engine-upgraded` | `json-rules-engine` | `json-logic-js` |
 |---|---|---|---|
@@ -150,7 +128,7 @@ How it compares to adjacent libraries:
 
 ## Related libraries
 
-**Not a schema validator.** Libraries like [Ajv](https://ajv.js.org/json-type-definition.html) and [Zod](https://zod.dev) answer *"is this data shaped correctly?"*. This library answers *"given this data, what business rule fires?"*. They compose cleanly — use the exported `RULE_JSON_SCHEMA` with Ajv to validate rule JSON at ingest.
+Not a schema validator. Libraries like [Ajv](https://ajv.js.org/json-type-definition.html) and [Zod](https://zod.dev) answer *"is this data shaped correctly?"*. This library answers *"given this data, what business rule fires?"*. They compose — use the exported `RULE_JSON_SCHEMA` with Ajv to validate rule JSON at ingest.
 
 ## Docs
 
