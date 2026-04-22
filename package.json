@@ -1,31 +1,83 @@
 {
-  "name": "json-rules-engine-upgraded-monorepo",
-  "version": "0.0.0",
-  "private": true,
-  "description": "Monorepo root for json-rules-engine-upgraded",
+  "name": "json-rules-engine-upgraded",
+  "version": "1.0.0",
+  "description": "A modern, TypeScript-first JSON rules engine — the comprehensive, maintained successor to json-rules-engine.",
+  "keywords": [
+    "rules",
+    "rules-engine",
+    "json-rules",
+    "json-rules-engine",
+    "business-rules",
+    "validator",
+    "typescript"
+  ],
   "license": "MIT",
   "author": "clara",
+  "homepage": "https://github.com/hoppybunny/json-rules-engine-upgraded",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoppybunny/json-rules-engine-upgraded.git"
+  },
+  "bugs": "https://github.com/hoppybunny/json-rules-engine-upgraded/issues",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "json-rules": "./bin/json-rules.js"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./schema": {
+      "import": {
+        "types": "./dist/schema.d.ts",
+        "default": "./dist/schema.js"
+      },
+      "require": {
+        "types": "./dist/schema.d.cts",
+        "default": "./dist/schema.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
   "engines": {
     "node": ">=20"
   },
   "packageManager": "pnpm@9.0.0",
   "scripts": {
-    "build": "pnpm -r build",
-    "test": "pnpm -r test",
-    "test:run": "pnpm -r test:run",
-    "bench": "pnpm -r bench",
-    "lint": "pnpm -r lint",
-    "typecheck": "pnpm -r typecheck",
-    "changeset": "changeset",
-    "release": "pnpm build && changeset publish"
+    "build": "tsup",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "bench": "vitest bench --run",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm build"
   },
   "devDependencies": {
-    "@changesets/cli": "2.27.9",
     "@types/node": "20.14.2",
+    "publint": "0.2.10",
+    "tinybench": "3.0.6",
     "tsup": "8.3.0",
     "typescript": "5.5.4",
-    "vitest": "2.1.1",
-    "tinybench": "3.0.6",
-    "publint": "0.2.10"
+    "vitest": "2.1.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

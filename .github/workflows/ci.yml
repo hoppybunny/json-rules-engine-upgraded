@@ -23,4 +23,4 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test:run
       - run: pnpm build
-      - run: pnpm -r exec publint
+      - run: pnpm exec publint
