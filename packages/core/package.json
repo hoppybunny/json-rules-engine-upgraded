@@ -1,0 +1,75 @@
+{
+  "name": "json-rules-engine-upgraded",
+  "version": "1.0.0",
+  "description": "A modern, TypeScript-first JSON rules engine — the comprehensive, maintained successor to json-rules-engine.",
+  "keywords": [
+    "rules",
+    "rules-engine",
+    "json-rules",
+    "json-rules-engine",
+    "business-rules",
+    "validator",
+    "typescript"
+  ],
+  "license": "MIT",
+  "author": "Clara Chong",
+  "homepage": "https://github.com/clarachong/json-rules-engine-upgraded",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clarachong/json-rules-engine-upgraded.git",
+    "directory": "packages/core"
+  },
+  "bugs": "https://github.com/clarachong/json-rules-engine-upgraded/issues",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "json-rules": "./bin/json-rules.js"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./schema": {
+      "import": {
+        "types": "./dist/schema.d.ts",
+        "default": "./dist/schema.js"
+      },
+      "require": {
+        "types": "./dist/schema.d.cts",
+        "default": "./dist/schema.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "bench": "vitest bench --run",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm build"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
